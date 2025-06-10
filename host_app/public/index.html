@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belgian Bonanza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS is separated in the <style> block -->
+    <style>
+        :root {
+            --primary-bg: #1a1a1a;
+            --card-bg: #2c2c2c;
+            --text-color: #f0f0f0;
+            --header-color: #ffd700;
+            /* Gold color for headings */
+            --border-color: #444;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            /* Align to top to see list */
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            /* text-align: center; */
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--header-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        /* Styles for the new total votes section */
+        .total-votes-container {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            /* Increased width */
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .total-votes-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--header-color);
+            margin: 0 0 1rem 0;
+        }
+
+        .vote-breakdown-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 2rem;
+            /* row-gap column-gap */
+            justify-content: center;
+        }
+
+        .vote-breakdown-list li {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .vote-breakdown-list li span {
+            font-weight: bold;
+            color: white;
+            margin-left: 0.25rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Each category is a vertical container */
+        .category-card {
+            height: 240px;
+            width: 200px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            /* border-radius: 16px; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px var(--shadow-color);
+        }
+
+        .category-card:active {
+            transform: translateY(-5px) scale(0.98);
+        }
+
+        .emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: var(--header-color);
+            margin: 0.5rem 0;
+        }
+
+        .include-button {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--text-color);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            margin-top: 1rem;
+            min-width: 80px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+        <h1>Belgian Bonanza</h1>
+        <p class="subtitle">Click your favorite Belgian delight to cast your vote!</p>
+
+        <!-- Section for total votes and breakdown -->
+        <div id="total-votes-container" class="total-votes-container">
+            <h3 class="total-votes-title">Total Votes: <span id="total-votes-count">0</span></h3>
+            <ul id="vote-breakdown-list" class="vote-breakdown-list">
+                <li data-id="🍟">Fries:<span>0</span></li>
+                <li data-id="🍫">Chocolate:<span>0</span></li>
+                <li data-id="🍺">Beer:<span>0</span></li>
+                <li data-id="🧇">Waffles:<span>0</span></li>
+            </ul>
+        </div>
+
+        <div class="options-grid">
+
+            <!-- Fries Card -->
+            <div id="🍟" class="category-card">
+                <span class="emoji">🍟</span>
+                <p class="include-button" onclick="loadView(document.getElementById('🍟'), '🍟')">Fries</p>
+            </div>
+
+            <!-- Chocolate Card -->
+            <div id="🍫" class="category-card">
+                <span class="emoji">🍫</span>
+                <p class="include-button" onclick="loadView(document.getElementById('🍫'), '🍫')">Chocolate</p>
+            </div>
+
+            <!-- Beer Card -->
+            <div id="🍺" class="category-card">
+                <span class="emoji">🍺</span>
+                <p class="include-button" onclick="loadView(document.getElementById('🍺'), '🍺')">Beer</p>
+            </div>
+
+            <!-- Waffles Card -->
+            <div id="🧇" class="category-card">
+                <span class="emoji">🧇</span>
+                <p class="include-button" onclick="loadView(document.getElementById('🧇'), '🧇')">Waffles</p>
+            </div>
+        </div>
+    </div>
+    <script src="http://localhost:5000/flutter_bootstrap.js" async onload="loadApp('http://localhost:5000/')"></script>
+</body>
+
+</html>
