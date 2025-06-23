@@ -9,6 +9,7 @@ const loadApp = (appUrl) => {
   _flutter.loader.load({
     config: {
       entryPointBaseUrl: appUrl,
+      canvasKitBaseUrl: `${appUrl}/canvaskit/`,
     },
     onEntrypointLoaded: async (engineInitializer) => {
       const engine = await engineInitializer.initializeEngine({

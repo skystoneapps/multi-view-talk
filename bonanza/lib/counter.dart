@@ -40,6 +40,7 @@ class _CounterState extends State<Counter> {
   Widget build(BuildContext context) {
     final totalCount = TotalCountProvider.of(context);
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Roboto'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(

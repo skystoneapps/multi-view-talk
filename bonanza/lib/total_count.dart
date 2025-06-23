@@ -1,4 +1,8 @@
 import 'package:flutter/widgets.dart';
+import 'dart:js_interop';
+
+@JS()
+external void setCategoryVotes(String category, int votes);
 
 class TotalCountProvider extends InheritedNotifier<TotalCountState> {
   TotalCountProvider({
@@ -42,6 +46,7 @@ class TotalCountState extends ChangeNotifier {
   void increment(String category) {
     if (_counts.containsKey(category)) {
       _counts[category] = _counts[category]! + 1;
+      setCategoryVotes(category, _counts[category]!);
       notifyListeners();
     }
   }

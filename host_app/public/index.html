@@ -59,7 +59,7 @@
 
         /* Styles for the new total votes section */
         .total-votes-container {
-            display: none;
+            /* display: none; */
             background-color: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -164,16 +164,16 @@
 
     <div class="main-container">
         <h1>Belgian Bonanza</h1>
-        <p class="subtitle">Click your favorite Belgian delight to cast your vote!</p>
+        <p class="subtitle">Vote for your favorite Belgian snack!</p>
 
         <!-- Section for total votes and breakdown -->
         <div id="total-votes-container" class="total-votes-container">
-            <h3 class="total-votes-title">Total Votes: <span id="total-votes-count">0</span></h3>
+            <h3 class="total-votes-title">Votes</h3>
             <ul id="vote-breakdown-list" class="vote-breakdown-list">
-                <li data-id="🍟">Fries:<span>0</span></li>
-                <li data-id="🍫">Chocolate:<span>0</span></li>
-                <li data-id="🍺">Beer:<span>0</span></li>
-                <li data-id="🧇">Waffles:<span>0</span></li>
+                <li>Fries:<span id="🍟-votes">0</span></li>
+                <li>Chocolate:<span id="🍫-votes">0</span></li>
+                <li>Beer:<span id="🍺-votes">0</span></li>
+                <li>Waffles:<span id="🧇-votes">0</span></li>
             </ul>
         </div>
 
@@ -205,6 +205,13 @@
         </div>
     </div>
     <script src="http://localhost:5000/flutter_bootstrap.js" async onload="loadApp('http://localhost:5000/')"></script>
+    <script>
+        // Functionality belonging to the host app
+        function setCategoryVotes(category, votes) {
+            const categoryVotes = document.getElementById(`${category}-votes`);
+            categoryVotes.textContent = votes;
+        }
+    </script>
 </body>
 
 </html>
