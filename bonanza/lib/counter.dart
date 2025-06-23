@@ -43,33 +43,35 @@ class _CounterState extends State<Counter> {
       theme: ThemeData(fontFamily: 'Roboto'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: 20,
-            children: <Widget>[
-              Text(
-                widget.category,
-                style: const TextStyle(fontSize: 24),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                'Count:: ${totalCount.counts[widget.category] ?? 0}',
-                style: const TextStyle(fontSize: 32),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  totalCount.increment(widget.category);
-                },
-                child: Text('Vote for ${widget.category}'),
-              ),
-              Text(
-                'Total Count: ${totalCount.total}',
-                style: const TextStyle(fontSize: 24),
-              ),
-            ],
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: 8,
+              children: <Widget>[
+                Text(
+                  widget.category,
+                  style: const TextStyle(fontSize: 24),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  'Count:: ${totalCount.counts[widget.category] ?? 0}',
+                  style: const TextStyle(fontSize: 32),
+                ),
+                Text(
+                  'Total Count: ${totalCount.total}',
+                  style: const TextStyle(fontSize: 24),
+                ),
+              ],
+            ),
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            totalCount.increment(widget.category);
+          },
+          child: Icon(Icons.add),
         ),
       ),
     );
