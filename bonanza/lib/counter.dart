@@ -56,7 +56,7 @@ class _CounterState extends State<Counter> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  'Count:: ${totalCount.counts[widget.category] ?? 0}',
+                  'Count_: ${totalCount.counts[widget.category] ?? 0}',
                   style: const TextStyle(fontSize: 32),
                 ),
                 Text(

@@ -21,7 +21,6 @@
                 "Access-Control-Allow-Credentials=true",
                 "--web-launch-url",
                 "http://localhost:8080/",
-                "--web-experimental-hot-reload",
             ],
         },
         {
