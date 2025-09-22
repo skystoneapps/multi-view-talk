@@ -159,12 +159,14 @@
         }
     </style>
 </head>
-<!-- 
+
 <body>
+
     <div class="main-container">
         <h1>Belgian Bonanza</h1>
         <p class="subtitle">Vote for your favorite Belgian snack!</p>
 
+        <!-- Section for total votes and breakdown -->
         <div id="total-votes-container" class="total-votes-container">
             <h3 class="total-votes-title">Votes</h3>
             <ul id="vote-breakdown-list" class="vote-breakdown-list">
@@ -177,72 +179,47 @@
 
         <div class="options-grid">
 
+            <!-- Fries Card -->
             <div id="🍟" class="category-card">
                 <span class="emoji">🍟</span>
-                <p class="include-button">Fries</p>
+                <p class="include-button" onclick="loadView(document.getElementById('🍟'), '🍟')">Fries</p>
             </div>
 
+            <!-- Chocolate Card -->
             <div id="🍫" class="category-card">
                 <span class="emoji">🍫</span>
-                <p class="include-button">Chocolate</p>
+                <p class="include-button" onclick="loadView(document.getElementById('🍫'), '🍫')">Chocolate</p>
             </div>
 
+            <!-- Beer Card -->
             <div id="🍺" class="category-card">
                 <span class="emoji">🍺</span>
-                <p class="include-button">Beer</p>
+                <p class="include-button" onclick="loadView(document.getElementById('🍺'), '🍺')">Beer</p>
             </div>
 
+            <!-- Waffles Card -->
             <div id="🧇" class="category-card">
                 <span class="emoji">🧇</span>
-                <p class="include-button">Waffles</p>
+                <p class="include-button" onclick="loadView(document.getElementById('🧇'), '🧇')">Waffles</p>
             </div>
-
         </div>
     </div>
-   <script src="http://localhost:5000/flutter_bootstrap.js" async onload="loadApp('http://localhost:5000/')"></script>
+    <script src="http://localhost:5000/flutter_bootstrap.js" async onload="loadApp('http://localhost:5000/')"></script>
     <script>
+
+        const viewId = votesApp.addView({
+            hostElement: document.getElementById('🍟'),
+            initialData: {
+                category: '🍟'
+            }
+        })
+
         // Functionality belonging to the host app
         function setCategoryVotes(category, votes) {
             const categoryVotes = document.getElementById(`${category}-votes`);
             categoryVotes.textContent = votes;
         }
     </script>
-</body> -->
-
-
-<body>
-    <div class="main-container">
-        <h1>Belgian Bonanza</h1>
-        <p class="subtitle">Vote for your favorite Belgian snack!</p>
-
-        <div id="votes-container">
-            ...
-        </div>
-
-        <div class="options-grid">
-
-            <div id="🍟" class="category-card">
-                <span class="emoji">🍟</span>
-                <p class="include-button">Fries</p>
-            </div>
-
-            <div id="🍫" class="category-card">
-                <span class="emoji">🍫</span>
-                <p class="include-button">Chocolate</p>
-            </div>
-
-            <div id="🍺" class="category-card">
-                <span class="emoji">🍺</span>
-                <p class="include-button">Beer</p>
-            </div>
-
-            <div id="🧇" class="category-card">
-                <span class="emoji">🧇</span>
-                <p class="include-button">Waffles</p>
-            </div>
-
-        </div>
-    </div>
 </body>
 
 </html>

@@ -1,13 +1,13 @@
+import 'dart:ui_web' as ui_web;
+
+import 'package:bonanza/main.dart';
 import 'package:bonanza/total_count.dart';
 import 'package:flutter/material.dart';
 
 class Counter extends StatefulWidget {
   const Counter({
     super.key,
-    required this.category,
   });
-
-  final String category;
 
   @override
   State<Counter> createState() => _CounterState();
@@ -28,12 +28,19 @@ class _CounterState extends State<Counter> {
     super.dispose();
   }
 
+  String get category {
+    final int viewId = View.of(context).viewId;
+    final initialData =
+        ui_web.views.getInitialData(viewId) as VoteCounterInitialData;
+    return initialData.category; // e.g. "🍟"
+  }
+
   void _registerCounter() {
-    TotalCountProvider.of(context).registerCategory(widget.category);
+    TotalCountProvider.of(context).registerCategory(category);
   }
 
   void _unregisterCounter() {
-    TotalCountProvider.of(context).unregisterCategory(widget.category);
+    TotalCountProvider.of(context).unregisterCategory(category);
   }
 
   @override
@@ -51,12 +58,12 @@ class _CounterState extends State<Counter> {
               spacing: 8,
               children: <Widget>[
                 Text(
-                  widget.category,
+                  category,
                   style: const TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  'Count_: ${totalCount.counts[widget.category] ?? 0}',
+                  'Count_: ${totalCount.counts[category] ?? 0}',
                   style: const TextStyle(fontSize: 32),
                 ),
                 Text(
@@ -69,7 +76,7 @@ class _CounterState extends State<Counter> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            totalCount.increment(widget.category);
+            totalCount.increment(category);
           },
           child: Icon(Icons.add),
         ),
